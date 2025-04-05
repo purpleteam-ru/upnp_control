@@ -22,9 +22,9 @@ Service Exposure	Internal → External port mapping	🎯 Medium
 🛠️ Usage
 ```bash
 
-python3 upnp_exploit.py <router_ip> <network_prefix>
+python3 upnp_control.py <router_ip> <network_prefix>
 # Example:
-python3 upnp_exploit.py external_ip local_ip
+python3 upnp_control.py external_ip local_ip
 ```
 
 💀 Exploit Workflow
