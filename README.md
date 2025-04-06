@@ -2,24 +2,24 @@
 
 **A stealthy UPnP router exploitation tool for bypassing NAT/firewalls**
 
-## 📌 Core Functionality
+## Core Functionality
 - **Automated UPnP exploitation** via SOAP requests
 - **Multi-threaded** port scanning (8 threads)
 - **Proxy-aware** (127.0.0.1:8080)
 - **Self-cleaning** (removes port mappings post-scan)
 
-## 🎯 Target Ports
+## Target Ports
 ```python
 ['21', '22', '23', '80', '443', '8080', '139', '445', '135', '3389', '110', '25', '49152']
 ```
 
-⚡ Attack Vectors
+Attack Vectors
 Technique	SOAP Action	Risk
 Port Forwarding	AddPortMapping	🔴 High
 Firewall Bypass	NAT traversal via UPnP	🔥 Critical
 Service Exposure	Internal → External port mapping	🎯 Medium
 
-🛠️ Usage
+Usage
 ```bash
 
 python3 upnp_control.py <router_ip> <network_prefix>
@@ -27,7 +27,7 @@ python3 upnp_control.py <router_ip> <network_prefix>
 python3 upnp_control.py external_ip local_ip
 ```
 
-💀 Exploit Workflow
+Exploit Workflow
 
 Recon
     Identifies UPnP service on port 49152
@@ -41,19 +41,18 @@ Verify
 Cleanup
     Removes evidence via DeletePortMapping
 
-🔥 Red Team Benefits
+Red Team Benefits
     Internal network pivoting
     RDP/SSH/SMB exposure
     Low detection rate (legitimate UPnP traffic)
 
-🛡️ Blue Team Countermeasures
+Blue Team Countermeasures
 ```bash
 # Disable UPnP on routers:
 iptables -A INPUT -p tcp --dport 1900 -j DROP
 iptables -A INPUT -p udp --dport 1900 -j DROP
 ```
-
-📜 Sample SOAP Payload
+Sample SOAP Payload
 ```xml
 <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
   <s:Body>
