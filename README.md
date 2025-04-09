@@ -14,14 +14,15 @@
 ```
 
 Attack Vectors
+
 Technique	SOAP Action	Risk
+
 Port Forwarding	AddPortMapping	🔴 High
 Firewall Bypass	NAT traversal via UPnP	🔥 Critical
 Service Exposure	Internal → External port mapping	🎯 Medium
 
 Usage
 ```bash
-
 python3 upnp_control.py <router_ip> <network_prefix>
 # Example:
 python3 upnp_control.py external_ip local_ip
