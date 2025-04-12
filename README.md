@@ -10,16 +10,16 @@
 
 ## Target Ports
 ```python
-['21', '22', '23', '80', '443', '8080', '139', '445', '135', '3389', '110', '25', '49152']
+['21', '22', '23', '80', '443', '8080', '139', '445', '135', '3389', '110', '25']
 ```
 
 Attack Vectors
 
 Technique	SOAP Action	Risk
 
-Port Forwarding	AddPortMapping	🔴 High
-Firewall Bypass	NAT traversal via UPnP	🔥 Critical
-Service Exposure	Internal → External port mapping	🎯 Medium
+Port Forwarding	AddPortMapping - High
+Firewall Bypass	NAT traversal via UPnP - Critical
+Service Exposure	Internal → External port mapping - Medium
 
 Usage
 ```bash
